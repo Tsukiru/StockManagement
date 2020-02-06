@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StockManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 
-namespace TPBibliotheque
+namespace StockManagement.Data
 {
     public class MagasinDbContext : DbContext
     {
@@ -32,7 +33,7 @@ namespace TPBibliotheque
                 .HasForeignKey(s => s.SecteurId);
 
             // création de la classe de configuration pour l'entité "ApprenticeLink"
-            var positionMagasin = modelBuilder.Entity<PositionMagasin>();
+            var positionMagasin = modelBuilder.Entity<PositionsMagasin>();
             //définition du mapping n n
             positionMagasin.HasKey(pm => new { pm.EtagereId, pm.ArticleId }); // définition d'une clé composée
             positionMagasin
@@ -53,13 +54,20 @@ namespace TPBibliotheque
             base.OnModelCreating(modelBuilder);
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            // définition de la base de données à utiliser ainsi que de la chaine de connexion
+        /*        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+                {
+                    // définition de la base de données à utiliser ainsi que de la chaine de connexion
 
-            optionsBuilder.UseSqlite("Filename=test.db");
-            /*SqlLite ou SqlServer (direct sur vs) */
-            base.OnConfiguring(optionsBuilder);
+                    optionsBuilder.UseSqlite("Filename=store.db");
+                    *//*SqlLite ou SqlServer (direct sur vs) *//*
+                    base.OnConfiguring(optionsBuilder);
+                }*/
+
+        public MagasinDbContext(
+            DbContextOptions<MagasinDbContext> options) //En passant une instance de DbContextOptions<Type>, on va permettre la configuration depuis "l'extérieur" et éviter ainsi d'overrider OnConfiguring
+            : base(options) // Il est nécessaire de passer ces options à la classe de base pour qu'elle puisse l'exploiter
+        {
+
         }
 
     }
