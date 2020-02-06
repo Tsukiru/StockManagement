@@ -13,7 +13,7 @@ namespace StockManagement.Controllers
     public class ArticlesController : Controller
     {
         private readonly MagasinDbContext _context;
-///remplacer dbContext par ArticleEFRepository
+       ///remplacer dbContext par ArticleEFRepository et MagasinDbContext par ArticleDbContext
 
         public ArticlesController(MagasinDbContext context)
         {
