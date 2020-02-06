@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StockManagement.Services
 {
-    interface IArticleRepository
+    public interface IArticleRepository
     {
         void Insert(Article article);
         void Update(Article article);

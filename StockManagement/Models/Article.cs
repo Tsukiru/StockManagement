@@ -8,7 +8,7 @@ namespace StockManagement.Models
     public class Article
     {
         public int Id { get; set; }
-        public string libelle { get; set; }
+        public string Libelle { get; set; }
         public string SKU { get; set; }
         public DateTime DateSortie { get; set; }
         public decimal PrixInitial { get; set; }
