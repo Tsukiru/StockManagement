@@ -30,7 +30,7 @@ namespace StockManagement
             services.AddDbContext<MagasinDbContext>(options => options.UseSqlite("Filename=store.db"));
             services.AddScoped<IArticleRepository, ArticleEFRepository>();
             services.AddScoped<IEtagereRepository, EtagereEFRepository>();
-            services.AddScoped<ISecteurRepositiry, SecteurEFRepository>();
+            services.AddScoped<ISecteurRepository, SecteurEFRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

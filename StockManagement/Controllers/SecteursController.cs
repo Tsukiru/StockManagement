@@ -7,22 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StockManagement.Data;
 using StockManagement.Models;
+using StockManagement.Services;
 
 namespace StockManagement.Controllers
 {
     public class SecteursController : Controller
     {
-        private readonly MagasinDbContext _context;
+        private readonly ISecteurRepository _repo;
 
-        public SecteursController(MagasinDbContext context)
+        public SecteursController(ISecteurRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         // GET: Secteurs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Secteurs.ToListAsync());
+            return View(await _repo.GetAll());
         }
 
         // GET: Secteurs/Details/5
@@ -33,8 +34,7 @@ namespace StockManagement.Controllers
                 return NotFound();
             }
 
-            var secteur = await _context.Secteurs
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var secteur = await _repo.FindById((int)id);
             if (secteur == null)
             {
                 return NotFound();
@@ -58,8 +58,8 @@ namespace StockManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(secteur);
-                await _context.SaveChangesAsync();
+                _repo.Insert(secteur);
+                await _repo.Save();
                 return RedirectToAction(nameof(Index));
             }
             return View(secteur);
@@ -73,7 +73,7 @@ namespace StockManagement.Controllers
                 return NotFound();
             }
 
-            var secteur = await _context.Secteurs.FindAsync(id);
+            var secteur = await _repo.FindById((int)id);
             if (secteur == null)
             {
                 return NotFound();
@@ -97,8 +97,8 @@ namespace StockManagement.Controllers
             {
                 try
                 {
-                    _context.Update(secteur);
-                    await _context.SaveChangesAsync();
+                    _repo.Update(secteur);
+                    await _repo.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,8 +124,7 @@ namespace StockManagement.Controllers
                 return NotFound();
             }
 
-            var secteur = await _context.Secteurs
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var secteur = await _repo.FindById((int)id);
             if (secteur == null)
             {
                 return NotFound();
@@ -139,15 +138,15 @@ namespace StockManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var secteur = await _context.Secteurs.FindAsync(id);
-            _context.Secteurs.Remove(secteur);
-            await _context.SaveChangesAsync();
+            var secteur = await _repo.FindById(id);
+            _repo.Remove(secteur);
+            await _repo.Save();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SecteurExists(int id)
         {
-            return _context.Secteurs.Any(e => e.Id == id);
+            return _repo.Exists(id);
         }
     }
 }

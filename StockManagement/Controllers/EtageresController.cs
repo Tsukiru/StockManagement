@@ -7,23 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StockManagement.Data;
 using StockManagement.Models;
+using StockManagement.Services;
 
 namespace StockManagement.Controllers
 {
     public class EtageresController : Controller
     {
-        private readonly MagasinDbContext _context;
+        private readonly IEtagereRepository _repo;
+        private readonly ISecteurRepository _repoSecteur;
 
-        public EtageresController(MagasinDbContext context)
+        public EtageresController(IEtagereRepository repo, ISecteurRepository repoSecteur)
         {
-            _context = context;
+            _repo = repo;
+            _repoSecteur = repoSecteur;
         }
 
         // GET: Etageres
         public async Task<IActionResult> Index()
         {
-            var magasinDbContext = _context.Etageres.Include(e => e.Secteur);
-            return View(await magasinDbContext.ToListAsync());
+            return View(await _repo.GetAll());
         }
 
         // GET: Etageres/Details/5
@@ -34,9 +36,7 @@ namespace StockManagement.Controllers
                 return NotFound();
             }
 
-            var etagere = await _context.Etageres
-                .Include(e => e.Secteur)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var etagere = await _repo.FindById((int)id);
             if (etagere == null)
             {
                 return NotFound();
@@ -46,9 +46,9 @@ namespace StockManagement.Controllers
         }
 
         // GET: Etageres/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["SecteurId"] = new SelectList(_context.Secteurs, "Id", "Name");
+            ViewData["SecteurId"] = new SelectList(await _repoSecteur.GetAll(), "Id", "Name");
             return View();
         }
 
@@ -61,11 +61,11 @@ namespace StockManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(etagere);
-                await _context.SaveChangesAsync();
+                _repo.Insert(etagere);
+                await _repo.Save();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SecteurId"] = new SelectList(_context.Secteurs, "Id", "Name", etagere.SecteurId);
+            ViewData["SecteurId"] = new SelectList(await _repoSecteur.GetAll(), "Id", "Name", etagere.SecteurId);
             return View(etagere);
         }
 
@@ -77,12 +77,12 @@ namespace StockManagement.Controllers
                 return NotFound();
             }
 
-            var etagere = await _context.Etageres.FindAsync(id);
+            var etagere = await _repo.FindById((int)id);
             if (etagere == null)
             {
                 return NotFound();
             }
-            ViewData["SecteurId"] = new SelectList(_context.Secteurs, "Id", "Name", etagere.SecteurId);
+            ViewData["SecteurId"] = new SelectList(await _repo.GetAll(), "Id", "Name", etagere.SecteurId);
             return View(etagere);
         }
 
@@ -102,8 +102,8 @@ namespace StockManagement.Controllers
             {
                 try
                 {
-                    _context.Update(etagere);
-                    await _context.SaveChangesAsync();
+                    _repo.Update(etagere);
+                    await _repo.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,7 +118,7 @@ namespace StockManagement.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SecteurId"] = new SelectList(_context.Secteurs, "Id", "Name", etagere.SecteurId);
+            ViewData["SecteurId"] = new SelectList(await _repo.GetAll(), "Id", "Name", etagere.SecteurId);
             return View(etagere);
         }
 
@@ -130,9 +130,7 @@ namespace StockManagement.Controllers
                 return NotFound();
             }
 
-            var etagere = await _context.Etageres
-                .Include(e => e.Secteur)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var etagere = await _repo.FindById((int)id);
             if (etagere == null)
             {
                 return NotFound();
@@ -146,15 +144,15 @@ namespace StockManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var etagere = await _context.Etageres.FindAsync(id);
-            _context.Etageres.Remove(etagere);
-            await _context.SaveChangesAsync();
+            var etagere = await _repo.FindById(id);
+            _repo.Remove(etagere);
+            await _repo.Save();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EtagereExists(int id)
         {
-            return _context.Etageres.Any(e => e.Id == id);
+            return _repo.Exists(id);
         }
     }
 }

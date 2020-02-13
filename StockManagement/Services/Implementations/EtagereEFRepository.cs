@@ -19,13 +19,13 @@ namespace StockManagement.Services
 
         public async Task<Etagere> FindById(int id)
         {
-            Etagere etagere = await context.Etageres.FindAsync(id);
+            Etagere etagere = await context.Etageres.Include(e => e.Secteur).FirstOrDefaultAsync(m => m.Id == id);
             return etagere;
         }
 
         public async Task<IEnumerable<Etagere>> GetAll()
         {
-            List<Etagere> etageres = await context.Etageres.ToListAsync();
+            List<Etagere> etageres = await context.Etageres.Include(e => e.Secteur).ToListAsync();
             return etageres;
         }
 

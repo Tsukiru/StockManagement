@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StockManagement.Services
 {
-    public class SecteurEFRepository : ISecteurRepositiry
+    public class SecteurEFRepository : ISecteurRepository
     {
 
         private readonly MagasinDbContext context;
