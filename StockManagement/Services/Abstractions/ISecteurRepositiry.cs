@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StockManagement.Services
 {
-    interface ISecteurRepositiry
+    public interface ISecteurRepositiry
     {
 
         void Insert(Secteur secteur);
