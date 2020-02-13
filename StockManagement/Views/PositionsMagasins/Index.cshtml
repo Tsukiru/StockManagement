@@ -37,8 +37,8 @@
                 @Html.DisplayFor(modelItem => item.Quantite)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Edit", "Edit", new {ArticleId=item.ArticleId, EtagereId=item.EtagereId}) |
+                @Html.ActionLink("Details", "Details", new {ArticleId=item.ArticleId, EtagereId=item.EtagereId}) |
                 @Html.ActionLink("Delete", "Delete", new {ArticleId=item.ArticleId, EtagereId=item.EtagereId})
             </td>
         </tr>
