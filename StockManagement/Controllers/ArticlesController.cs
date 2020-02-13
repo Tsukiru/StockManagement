@@ -7,23 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StockManagement.Data;
 using StockManagement.Models;
+using StockManagement.Services;
 
 namespace StockManagement.Controllers
 {
     public class ArticlesController : Controller
     {
-        private readonly MagasinDbContext _context;
-       ///remplacer dbContext par ArticleEFRepository et MagasinDbContext par ArticleDbContext
+        private readonly IArticleRepository _repo;
 
-        public ArticlesController(MagasinDbContext context)
+        public ArticlesController(IArticleRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         // GET: Articles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Articles.ToListAsync());
+            return View(await _repo.GetAll());
         }
 
         // GET: Articles/Details/5
@@ -34,8 +34,7 @@ namespace StockManagement.Controllers
                 return NotFound();
             }
 
-            var article = await _context.Articles
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var article = await _repo.FindById((int)id);
             if (article == null)
             {
                 return NotFound();
@@ -59,8 +58,8 @@ namespace StockManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(article);
-                await _context.SaveChangesAsync();
+                _repo.Insert(article);
+                await _repo.Save();
                 return RedirectToAction(nameof(Index));
             }
             return View(article);
@@ -74,7 +73,7 @@ namespace StockManagement.Controllers
                 return NotFound();
             }
 
-            var article = await _context.Articles.FindAsync(id);
+            var article = await _repo.FindById((int)id);
             if (article == null)
             {
                 return NotFound();
@@ -98,8 +97,8 @@ namespace StockManagement.Controllers
             {
                 try
                 {
-                    _context.Update(article);
-                    await _context.SaveChangesAsync();
+                    _repo.Update(article);
+                    await _repo.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -125,8 +124,7 @@ namespace StockManagement.Controllers
                 return NotFound();
             }
 
-            var article = await _context.Articles
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var article = await _repo.FindById((int)id);
             if (article == null)
             {
                 return NotFound();
@@ -140,15 +138,15 @@ namespace StockManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var article = await _context.Articles.FindAsync(id);
-            _context.Articles.Remove(article);
-            await _context.SaveChangesAsync();
+            var article = await _repo.FindById(id);
+            _repo.Remove(article);
+            await _repo.Save();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ArticleExists(int id)
         {
-            return _context.Articles.Any(e => e.Id == id);
+            return _repo.Exists(id);
         }
     }
 }

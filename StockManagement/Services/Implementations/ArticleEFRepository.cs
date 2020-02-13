@@ -1,4 +1,5 @@
-﻿using StockManagement.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using StockManagement.Data;
 using StockManagement.Models;
 using System;
 using System.Collections.Generic;
@@ -16,15 +17,15 @@ namespace StockManagement.Services
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public Article FindById(int id)
+        public async Task<Article> FindById(int id)
         {
-            Article article = context.Articles.Where(m => m.Id == id).First();
+            Article article = await context.Articles.FindAsync(id);
             return article;
         }
 
-        public IEnumerable<Article> GetAll()
+        public async Task<IEnumerable<Article>> GetAll()
         {
-            List<Article> articles = context.Articles.ToList();
+            List<Article> articles = await context.Articles.ToListAsync();
             return articles;
         }
 
@@ -54,6 +55,11 @@ namespace StockManagement.Services
             return AveragePrice;
         }
 
+        public bool Exists(int id)
+        {
+            return context.Articles.Any(e => e.Id == id);
+        }
+
         public void Insert(Article article)
         {
             context.Articles.Add(article);
@@ -69,9 +75,9 @@ namespace StockManagement.Services
             context.Articles.Update(article);
         }
 
-        public void Save()
+        public async Task Save()
         {
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }

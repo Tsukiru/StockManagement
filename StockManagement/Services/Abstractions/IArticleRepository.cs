@@ -11,11 +11,12 @@ namespace StockManagement.Services
         void Insert(Article article);
         void Update(Article article);
         void Remove(Article article);
-        void Save();
-        IEnumerable<Article> GetAll();
+        Task Save();
+        public bool Exists(int id);
+        Task<IEnumerable<Article>> GetAll();
         IEnumerable<Article> GetAllByEtagere(int etagereId);
         IEnumerable<Article> GetAllBySecteur(int secteurId);
-        Article FindById(int articleId);
+        Task<Article> FindById(int articleId);
         decimal GetAveragePriceBySecteur(int secteurId);
     }
 }
