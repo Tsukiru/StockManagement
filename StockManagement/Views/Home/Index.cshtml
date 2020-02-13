@@ -2,7 +2,65 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<style>
+    .card{
+        margin:2rem;
+    }
+</style>
+
+<div class="container ">
+    <div class="row">
+        <div class="col-lg-6 ">
+            <div class="card" style="width: 18rem; height:15rem">
+                <div class="card-body">
+                    <h5 class="card-title">Articles</h5>
+                    <p class="card-text">Ici vous pourrez gerer svos articles, ajouter, modifier supprimer à votre guise</p>
+                </div>
+                <div class="card-footer">
+                    <a asp-area="" asp-controller="Articles" asp-action="Index" class="card-link">Gerez vos articles</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-6 ">
+            <div class="card" style="width: 18rem;height:15rem">
+                <div class="card-body">
+                    <h5 class="card-title">Étagères</h5>
+                    <p class="card-text">Là c'est gestion des étagère</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-link">Gerez vos étagères</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-lg-6 ">
+                <div class="card" style="width: 18rem;height:15rem">
+                    <div class="card-body">
+                        <h5 class="card-title">Secteurs</h5>
+                        <p class="card-text">C'est ici que vous pourrez gerer vos secteurs !</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-link">Gerez vos secteurs</a>
+                    </div>
+                </div>
+            </div>
+
+                <div class="col-lg-6 ">
+                    <div class="card" style="width: 18rem;height:15rem">
+                        <div class="card-body">
+                            <h5 class="card-title">Position</h5>
+                            <p class="card-text">C'est là que vous gerer les positions de chaque articles sur vos étageres</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="card-link">Gerez les positions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
