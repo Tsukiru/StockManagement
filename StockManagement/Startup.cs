@@ -31,6 +31,7 @@ namespace StockManagement
             services.AddScoped<IArticleRepository, ArticleEFRepository>();
             services.AddScoped<IEtagereRepository, EtagereEFRepository>();
             services.AddScoped<ISecteurRepository, SecteurEFRepository>();
+            services.AddScoped<IPositionMagasinRepository, PositionMagasinEFRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

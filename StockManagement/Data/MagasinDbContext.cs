@@ -10,9 +10,7 @@ namespace StockManagement.Data
     public class MagasinDbContext : DbContext
     {
         public DbSet<Article> Articles { get; set; }
-
         public DbSet<Etagere> Etageres { get; set; }
-
         public DbSet<Secteur> Secteurs { get; set; }
         public DbSet<PositionsMagasin> PositionsMagasin { get; set; }
 
