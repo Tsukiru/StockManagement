@@ -15,6 +15,6 @@ namespace StockManagement.Services
         Task<PositionsMagasin> FindById(int positionsMagasinId);
         Task<IEnumerable<PositionsMagasin>> GetAll();
 
-        public bool Exists(int id);
+        public bool Exists(int ArticleId, int EtagereId);
     }
 }

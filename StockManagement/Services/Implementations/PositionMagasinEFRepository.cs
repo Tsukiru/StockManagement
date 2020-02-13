@@ -30,9 +30,9 @@ namespace StockManagement.Services
             return positionsMagasin;
         }
 
-        public bool Exists(int id)
+        public bool Exists(int ArticleId, int EtagereId)
         {
-            return context.PositionsMagasin.Any(e => e.ArticleId == id);
+            return context.PositionsMagasin.Any(e => e.EtagereId == EtagereId && e.ArticleId == ArticleId);
         }
 
         public void Insert(PositionsMagasin positionMagasin)
