@@ -128,9 +128,9 @@ namespace StockManagement.Controllers
         }
 
         // GET: PositionsMagasins/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? EtagereId, int? ArticleId)
         {
-            if (id == null)
+            if (EtagereId == null || ArticleId == null)
             {
                 return NotFound();
             }
@@ -138,7 +138,7 @@ namespace StockManagement.Controllers
             var positionsMagasin = await _context.PositionsMagasin
                 .Include(p => p.Article)
                 .Include(p => p.Etagere)
-                .FirstOrDefaultAsync(m => m.EtagereId == id);
+                .FirstOrDefaultAsync(m => m.EtagereId == EtagereId && m.ArticleId == ArticleId);
             if (positionsMagasin == null)
             {
                 return NotFound();
