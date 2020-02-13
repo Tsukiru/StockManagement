@@ -86,7 +86,7 @@ namespace StockManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,libelle,SKU,DateSortie,PrixInitial,Poids")] Article article)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Libelle,SKU,DateSortie,PrixInitial,Poids")] Article article)
         {
             if (id != article.Id)
             {

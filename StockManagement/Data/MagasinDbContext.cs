@@ -11,6 +11,10 @@ namespace StockManagement.Data
     {
         public DbSet<Article> Articles { get; set; }
 
+        public DbSet<Etagere> Etageres { get; set; }
+
+        public DbSet<Secteur> Secteurs { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

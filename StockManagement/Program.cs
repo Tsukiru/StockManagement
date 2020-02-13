@@ -73,7 +73,7 @@ namespace StockManagement
                             Libelle = "Tablette",
                             SKU = "123456",
                             DateSortie = DateTime.Now,
-                            PrixInitial = 499.99m,
+                            PrixInitial = 499,
                             Poids = 499
                         },
                         new Article
@@ -82,7 +82,7 @@ namespace StockManagement
                             Libelle = "Telephone",
                             SKU = "789101",
                             DateSortie = DateTime.Now,
-                            PrixInitial = 299.59m,
+                            PrixInitial = 299,
                             Poids = 258
                         },
                         new Article
@@ -91,7 +91,7 @@ namespace StockManagement
                             Libelle = "PC",
                             SKU = "147852",
                             DateSortie = DateTime.Now,
-                            PrixInitial = 1566.23m,
+                            PrixInitial = 1566,
                             Poids = 1890
                         },
                         new Article
@@ -100,7 +100,7 @@ namespace StockManagement
                             Libelle = "Bureau",
                             SKU = "258963",
                             DateSortie = DateTime.Now,
-                            PrixInitial = 350m,
+                            PrixInitial = 350,
                             Poids = 9500
                         },
                  });

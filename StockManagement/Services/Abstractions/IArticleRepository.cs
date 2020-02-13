@@ -18,6 +18,6 @@ namespace StockManagement.Services
         public bool Exists(int id);
         IEnumerable<Article> GetAllByEtagere(int etagereId);
         IEnumerable<Article> GetAllBySecteur(int secteurId);
-        decimal GetAveragePriceBySecteur(int secteurId);
+        int GetAveragePriceBySecteur(int secteurId);
     }
 }

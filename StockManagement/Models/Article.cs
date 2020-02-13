@@ -11,8 +11,8 @@ namespace StockManagement.Models
         public string Libelle { get; set; }
         public string SKU { get; set; }
         public DateTime DateSortie { get; set; }
-        public decimal PrixInitial { get; set; }
-        public decimal Poids { get; set; }
+        public int PrixInitial { get; set; }
+        public int Poids { get; set; }
         public ICollection<PositionsMagasin> PositionMagasin { get; set; }
     }
 }

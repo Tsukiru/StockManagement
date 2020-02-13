@@ -29,32 +29,6 @@ namespace StockManagement.Services
             return articles;
         }
 
-        public IEnumerable<Article> GetAllByEtagere(int EtagereId)
-        {
-            List<Article> articles = context.Articles.Where(m => m.PositionMagasin.Any(p => p.EtagereId == EtagereId)).ToList();
-            return articles;
-        }
-
-        public IEnumerable<Article> GetAllBySecteur(int SecteurId)
-        {
-            List<Article> articles = context.Articles.Where(m => m.PositionMagasin.Any(p => p.Etagere.SecteurId == SecteurId)).ToList();
-            return articles;
-        }
-
-        public decimal GetAveragePriceBySecteur(int SecteurId)
-        {
-            decimal AveragePrice = 0;
-
-            List<Article> articlesBySecteur = (List<Article>)(GetAllBySecteur(SecteurId));
-
-            foreach (Article article in articlesBySecteur)
-            {
-                AveragePrice += article.PrixInitial;
-            }
-            AveragePrice /= articlesBySecteur.Count;
-            return AveragePrice;
-        }
-
         public bool Exists(int id)
         {
             return context.Articles.Any(e => e.Id == id);
@@ -78,6 +52,32 @@ namespace StockManagement.Services
         public async Task Save()
         {
             await context.SaveChangesAsync();
+        }
+
+        public IEnumerable<Article> GetAllByEtagere(int EtagereId)
+        {
+            List<Article> articles = context.Articles.Where(m => m.PositionMagasin.Any(p => p.EtagereId == EtagereId)).ToList();
+            return articles;
+        }
+
+        public IEnumerable<Article> GetAllBySecteur(int SecteurId)
+        {
+            List<Article> articles = context.Articles.Where(m => m.PositionMagasin.Any(p => p.Etagere.SecteurId == SecteurId)).ToList();
+            return articles;
+        }
+
+        public int GetAveragePriceBySecteur(int SecteurId)
+        {
+            int AveragePrice = 0;
+
+            List<Article> articlesBySecteur = (List<Article>)(GetAllBySecteur(SecteurId));
+
+            foreach (Article article in articlesBySecteur)
+            {
+                AveragePrice += article.PrixInitial;
+            }
+            AveragePrice /= articlesBySecteur.Count;
+            return AveragePrice;
         }
     }
 }
