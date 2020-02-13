@@ -10,9 +10,9 @@ using Xunit;
 
 namespace StockManagementTest
 {
-    public class TestEtagereEFRepository : InitDbcontext
+    public class TestSecteurEFRepository : InitDbcontext
     {
-        public TestEtagereEFRepository()
+        public TestSecteurEFRepository()
         {
             var myContext = CreateMagasinDbContext();
             FillDbContext(myContext);
@@ -21,23 +21,23 @@ namespace StockManagementTest
         [Fact]
         public void NullContextTest()
         {
-            Assert.Throws<ArgumentNullException>(() => new EtagereEFRepository(null));
+            Assert.Throws<ArgumentNullException>(() => new SecteurEFRepository(null));
         }
 
         [Fact]
         public async Task GetAllTest()
         {
             using var myContext = CreateMagasinDbContext();
-            var repo = new EtagereEFRepository(myContext);
-            var allEtageres = await repo.GetAll();
-            allEtageres.Should().HaveCount(4);
+            var repo = new SecteurEFRepository(myContext);
+            var allSecteurs = await repo.GetAll();
+            allSecteurs.Should().HaveCount(4);
         }
 
         [Fact]
         public void ExistsTest()
         {
             using var myContext = CreateMagasinDbContext();
-            var repo = new EtagereEFRepository(myContext);
+            var repo = new SecteurEFRepository(myContext);
             var exists = repo.Exists(1);
             exists.Should().BeTrue();
         }
@@ -47,10 +47,10 @@ namespace StockManagementTest
         public async Task FindByIdTest()
         {
             using var myContext = CreateMagasinDbContext();
-            var repo = new EtagereEFRepository(myContext);
-            var etagere = await repo.FindById(2);
-            etagere.PoidsMaximum.Should().Be(17000);
-            etagere.Id.Should().Be(2);
+            var repo = new SecteurEFRepository(myContext);
+            var secteur = await repo.FindById(2);
+            secteur.Name.Should().Be("Secteur B");
+            secteur.Id.Should().Be(2);
         }
 
         [Fact]
@@ -58,16 +58,16 @@ namespace StockManagementTest
         {
             using (var myContext = CreateMagasinDbContext())
             {
-                var repo = new EtagereEFRepository(myContext);
-                var etagere = await repo.FindById(1);
-                repo.Remove(etagere);
+                var repo = new SecteurEFRepository(myContext);
+                var secteur = await repo.FindById(1);
+                repo.Remove(secteur);
                 await repo.Save();
             }
             using (var myContext = CreateMagasinDbContext())
             {
-                var repo = new EtagereEFRepository(myContext);
+                var repo = new SecteurEFRepository(myContext);
                 var elements = await repo.GetAll();
-                elements.Should().HaveCount(3);
+                elements.Should().HaveCount(1);
                 elements.Any(e => e.Id == 1).Should().BeFalse();
             }
         }
@@ -77,24 +77,23 @@ namespace StockManagementTest
         {
             using (var myContext = CreateMagasinDbContext())
             {
-                var repo = new EtagereEFRepository(myContext);
-                var newEtagere = new Etagere
+                var repo = new SecteurEFRepository(myContext);
+                var newSecteur = new Secteur
                 {
-                    Id = 5,
-                    PoidsMaximum = 22000,
-                    SecteurId = 2
+                    Id = 3,
+                    Name = "Secteur C"
                 };
 
-                repo.Insert(newEtagere);
+                repo.Insert(newSecteur);
                 await (repo.Save());
             }
             using (var myContext = CreateMagasinDbContext())
             {
-                var repo = new EtagereEFRepository(myContext);
+                var repo = new SecteurEFRepository(myContext);
                 var elements = await repo.GetAll();
-                elements.Should().HaveCount(5);
-                elements.Any(e => e.Id == 5).Should().BeTrue();
-                elements.Any(e => e.PoidsMaximum == 22000).Should().BeTrue();
+                elements.Should().HaveCount(3);
+                elements.Any(e => e.Id == 3).Should().BeTrue();
+                elements.Any(e => e.Name == "Secteur C").Should().BeTrue();
             }
         }
 
@@ -103,26 +102,25 @@ namespace StockManagementTest
         {
             using (var myContext = CreateMagasinDbContext())
             {
-                var repo = new EtagereEFRepository(myContext);
-                var etagere = new Etagere
+                var repo = new SecteurEFRepository(myContext);
+                var secteur = new Secteur
                 {
                     Id = 1,
-                    PoidsMaximum = 26580,
-                    SecteurId = 2
+                    Name = "Secteur Z"
                 };
 
-                repo.Update(etagere);
+                repo.Update(secteur);
                 await repo.Save();
             }
             using (var myContext = CreateMagasinDbContext())
             {
-                var repo = new EtagereEFRepository(myContext);
+                var repo = new SecteurEFRepository(myContext);
                 var elements = await repo.GetAll();
-                elements.Should().HaveCount(4);
+                elements.Should().HaveCount(2);
                 elements.Any(e => e.Id == 1).Should().BeTrue();
-                elements.Any(e => e.PoidsMaximum == 26580).Should().BeTrue();
-                elements.Any(e => e.PoidsMaximum == 15000).Should().BeFalse();
-                elements.Any(e => e.SecteurId == 2).Should().BeTrue();
+                elements.Any(e => e.Name == "Secteur Z").Should().BeTrue();
+                elements.Any(e => e.Name  == "Secteur A").Should().BeFalse();
+                elements.Any(e => e.Id == 1).Should().BeTrue();
             }
         }
     }
