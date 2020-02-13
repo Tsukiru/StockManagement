@@ -35,6 +35,16 @@ namespace StockManagementTest
         }
 
         [Fact]
+        public void ExistsTest()
+        {
+            using var myContext = CreateMagasinDbContext();
+            var repo = new ArticleEFRepository(myContext);
+            var exists = repo.Exists(1);
+            exists.Should().BeTrue();
+        }
+
+
+        [Fact]
         public async Task FindByIdTest()
         {
             using var myContext = CreateMagasinDbContext();
