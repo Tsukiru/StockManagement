@@ -63,9 +63,19 @@ namespace StockManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(positionsMagasin);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (PositionsMagasinExists(positionsMagasin.EtagereId, positionsMagasin.ArticleId))
+                {
+                    _context.Update(positionsMagasin);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    _context.Add(positionsMagasin);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+
             }
             ViewData["ArticleId"] = new SelectList(_context.Articles, "Id", "Libelle", positionsMagasin.ArticleId);
             ViewData["EtagereId"] = new SelectList(_context.Etageres, "Id", "Id", positionsMagasin.EtagereId);
