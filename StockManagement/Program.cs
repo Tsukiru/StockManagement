@@ -20,6 +20,7 @@ namespace StockManagement
 
             var ctx = (MagasinDbContext)builder.Services.CreateScope().ServiceProvider.GetRequiredService(typeof(MagasinDbContext));
 
+            //ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
 
             if (!ctx.Articles.Any())
