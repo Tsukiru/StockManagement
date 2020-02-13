@@ -18,9 +18,9 @@ namespace StockManagement.Services
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<PositionsMagasin> FindById(int id)
+        public async Task<PositionsMagasin> FindById(int EtagereId, int ArticleId)
         {
-            PositionsMagasin positionMagasin = await context.PositionsMagasin.FindAsync(id);
+            PositionsMagasin positionMagasin = await context.PositionsMagasin.FirstOrDefaultAsync(m => m.EtagereId == EtagereId && m.ArticleId == ArticleId);
             return positionMagasin;
         }
 

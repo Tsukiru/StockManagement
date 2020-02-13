@@ -12,7 +12,7 @@ namespace StockManagement.Services
         void Update(PositionsMagasin positionsMagasin);
         void Remove(PositionsMagasin positionsMagasin);
         Task Save();
-        Task<PositionsMagasin> FindById(int positionsMagasinId);
+        Task<PositionsMagasin> FindById(int EtagereId, int ArticleId);
         Task<IEnumerable<PositionsMagasin>> GetAll();
 
         public bool Exists(int ArticleId, int EtagereId);
