@@ -30,7 +30,7 @@ namespace StockManagementTest
             using var myContext = CreateMagasinDbContext();
             var repo = new SecteurEFRepository(myContext);
             var allSecteurs = await repo.GetAll();
-            allSecteurs.Should().HaveCount(4);
+            allSecteurs.Should().HaveCount(2);
         }
 
         [Fact]
