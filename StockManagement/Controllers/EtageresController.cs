@@ -82,7 +82,7 @@ namespace StockManagement.Controllers
             {
                 return NotFound();
             }
-            ViewData["SecteurId"] = new SelectList(await _repo.GetAll(), "Id", "Name", etagere.SecteurId);
+            ViewData["SecteurId"] = new SelectList(await _repoSecteur.GetAll(), "Id", "Name", etagere.SecteurId);
             return View(etagere);
         }
 
