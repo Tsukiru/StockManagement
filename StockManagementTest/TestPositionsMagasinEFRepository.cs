@@ -58,16 +58,16 @@ namespace StockManagementTest
             using (var myContext = CreateMagasinDbContext())
             {
                 var repo = new PositionMagasinEFRepository(myContext);
-                var positionMagasin = await repo.FindById(1);
-                repo.Remove(secteur);
+                var positionMagasin = await repo.FindById(1, 1);
+                repo.Remove(positionMagasin);
                 await repo.Save();
             }
             using (var myContext = CreateMagasinDbContext())
             {
                 var repo = new PositionMagasinEFRepository(myContext);
                 var elements = await repo.GetAll();
-                elements.Should().HaveCount(1);
-                elements.Any(e => e.Id == 1).Should().BeFalse();
+                elements.Should().HaveCount(2);
+                elements.Any(e => e.Quantite == 10).Should().BeFalse();
             }
         }
 
@@ -77,22 +77,22 @@ namespace StockManagementTest
             using (var myContext = CreateMagasinDbContext())
             {
                 var repo = new PositionMagasinEFRepository(myContext);
-                var newSecteur = new Secteur
+                var positionMagasin = new PositionsMagasin
                 {
-                    Id = 3,
-                    Name = "Secteur C"
+                    ArticleId = 4,
+                    EtagereId = 3,
+                    Quantite = 7
                 };
 
-                repo.Insert(newSecteur);
+                repo.Insert(positionMagasin);
                 await (repo.Save());
             }
             using (var myContext = CreateMagasinDbContext())
             {
                 var repo = new PositionMagasinEFRepository(myContext);
                 var elements = await repo.GetAll();
-                elements.Should().HaveCount(3);
-                elements.Any(e => e.Id == 3).Should().BeTrue();
-                elements.Any(e => e.Name == "Secteur C").Should().BeTrue();
+                elements.Should().HaveCount(4);
+                elements.Any(e => e.Quantite == 7).Should().BeTrue();
             }
         }
 
@@ -102,24 +102,23 @@ namespace StockManagementTest
             using (var myContext = CreateMagasinDbContext())
             {
                 var repo = new PositionMagasinEFRepository(myContext);
-                var secteur = new Secteur
+                var positionMagasin = new PositionsMagasin
                 {
-                    Id = 1,
-                    Name = "Secteur Z"
+                    ArticleId = 1,
+                    EtagereId = 1,
+                    Quantite = 7
                 };
 
-                repo.Update(secteur);
+                repo.Update(positionMagasin);
                 await repo.Save();
             }
             using (var myContext = CreateMagasinDbContext())
             {
                 var repo = new PositionMagasinEFRepository(myContext);
                 var elements = await repo.GetAll();
-                elements.Should().HaveCount(2);
-                elements.Any(e => e.Id == 1).Should().BeTrue();
-                elements.Any(e => e.Name == "Secteur Z").Should().BeTrue();
-                elements.Any(e => e.Name  == "Secteur A").Should().BeFalse();
-                elements.Any(e => e.Id == 1).Should().BeTrue();
+                elements.Should().HaveCount(3);
+                elements.Any(e => e.Quantite == 7).Should().BeTrue();
+                elements.Any(e => e.Quantite  == 10).Should().BeFalse();
             }
         }
     }
