@@ -23,10 +23,14 @@ namespace StockManagement.Data
             // définition du mapping
             articleEntity.HasKey(a => a.Id); // définition du champ clé
 
+            // propriété du model à ignorer a la creation
+            articleEntity.Ignore(a => a.Test);
+
             // création de la classe de configuration pour l'entité "Teacher"
             var etagereEntity = modelBuilder.Entity<Etagere>();
             // définition du mapping
             etagereEntity.HasKey(e => e.Id);
+
            
             //création des relations
 

@@ -13,6 +13,7 @@ namespace StockManagement.Models
         public DateTime DateSortie { get; set; }
         public int PrixInitial { get; set; }
         public int Poids { get; set; }
+        public int Test { get; set; }
         public ICollection<PositionsMagasin> PositionMagasin { get; set; }
     }
 }
