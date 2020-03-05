@@ -4,7 +4,9 @@ using StockManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xunit;
 
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
 namespace StockManagementTest
 {
     public class InitDbcontext
