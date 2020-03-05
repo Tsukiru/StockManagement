@@ -4,63 +4,130 @@
 
 <style>
     .card{
-        margin:2rem;
+        border:none;
     }
 </style>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-6 ">
-            <div class="card" style="width: 18rem; height:15rem">
-                <div class="card-body">
-                    <h5 class="card-title">Articles</h5>
-                    <p class="card-text">Ici vous pourrez gerer svos articles, ajouter, modifier supprimer à votre guise</p>
-                </div>
-                <div class="card-footer">
-                    <a asp-area="" asp-controller="Articles" asp-action="Index" class="card-link">Gerez vos articles</a>
-                </div>
-
+<section id="sec-about" class="sec-about pt-5 pb-5">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-md-10 col-lg-8">
+                <h1 class="h4">A propos de nous !</h1>
+                <p class="mt-4 mb-4">
+                    Mélanger une équipe de trois développeurs ! un travail <b>titanesque </b>! Un nombre de tasses de café <b>gigantesque</b>,
+                    et vous obtenez <b>StockManagement</b>, Une application de gestion de stock merveilleuse !
+                </p>
             </div>
         </div>
 
-        <div class="col-lg-6 ">
-            <div class="card" style="width: 18rem;height:15rem">
-                <div class="card-body">
-                    <h5 class="card-title">Étagères</h5>
-                    <p class="card-text">Là c'est gestion des étagère</p>
+        <div class="row mt-4">
+            <div class="col-sm-4 text-center">
+                <h4>3</h4>
+
+                <hr />
+
+                <h5>
+                    membres
+                </h5>
+            </div>
+                
+            <div class="col-sm-4 text-center">
+                <h4>4</h4>
+
+                <hr />
+
+                <h5>espace de co-working </h5>
+            </div>
+
+            <div class="col-sm-4 text-center">
+                <h4>324</h4>
+
+                <hr />
+
+                <h5>Tasses de café</h5>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr />
+
+
+<section id="sec-pricing" class="sec-pricing">
+    <div class="container">
+        <h1 class="h4 mb-5 text-center">Toutes les possibilités</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title h5">ARTICLES</h4>
+
+                        
+
+                        <p class="card-text">Visualisez, Ajouter, Modifier, Supprimer vos Articles !</p>
+
+
+                        <a asp-controller="Articles" asp-action="Index" class="btn btn-primary">Let's Go !</a>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <a href="#" class="card-link">Gerez vos étagères</a>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title h5">ETAGERES</h4>
+
+                        
+
+                        <p class="card-text">Visualisez, Ajouter, Modifier, Supprimer vos Etageres !</p>
+
+
+                        <a asp-controller="Etageres" asp-action="Index" class="btn btn-primary">Let's Go !</a>
+                    </div>
                 </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-block justify-content-center">
+                        <h4 class="card-title h5">SECTEURS</h4>
+
+                       
+
+                        <p class="card-text">Visualisez, Ajouter, Modifier, Supprimer vos Secteurs !</p>
+
+                        <a asp-controller="Secteurs" asp-action="Index" class="btn btn-primary">Let's Go !</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center" style="margin-top:2em">
+            <div class="col-md-4">
+
+            </div>
+
+            <div class="col-md-4" style="margin-bottom:2em;">
+                <div class="card text-center">
+                    <div class="card-block">
+                        <h4 class="card-title h5">POSITION MAGASIN</h4>
+
+                       
+
+                        <p class="card-text">Gerez la position de vos articles, vous saurez au courant de tout !</p>
+
+                        <a asp-area="" asp-controller="PositionsMagasins" asp-action="Index" class="btn btn-primary">Let's Go !</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
 
             </div>
         </div>
     </div>
-        <div class="row">
-            <div class="col-lg-6 text-right">
-                <div class="card" style="width: 18rem;height:15rem">
-                    <div class="card-body">
-                        <h5 class="card-title">Secteurs</h5>
-                        <p class="card-text">C'est ici que vous pourrez gerer vos secteurs !</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="card-link">Gerez vos secteurs</a>
-                    </div>
-                </div>
-            </div>
+</section>
 
-                <div class="col-lg-6">
-                    <div class="card" style="width: 18rem;height:15rem">
-                        <div class="card-body">
-                            <h5 class="card-title">Position</h5>
-                            <p class="card-text">C'est là que vous gerer les positions de chaque articles sur vos étageres</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="card-link">Gerez les positions</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
+
+
 
