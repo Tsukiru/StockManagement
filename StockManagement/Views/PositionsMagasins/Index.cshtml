@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<StockManagement.Models.PositionsMagasin>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Positions magasin";
 }
 
-<h1>Index</h1>
+<h1>Positions magasin</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Ajouter une position</a>
 </p>
 <table class="table">
     <thead>
@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.Quantite)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {ArticleId=item.ArticleId, EtagereId=item.EtagereId}) |
-                @Html.ActionLink("Details", "Details", new {ArticleId=item.ArticleId, EtagereId=item.EtagereId}) |
-                @Html.ActionLink("Delete", "Delete", new {ArticleId=item.ArticleId, EtagereId=item.EtagereId})
+                @Html.ActionLink("Éditer", "Edit", new {ArticleId=item.ArticleId, EtagereId=item.EtagereId}) |
+                @Html.ActionLink("Détails", "Details", new {ArticleId=item.ArticleId, EtagereId=item.EtagereId}) |
+                @Html.ActionLink("Supprimer", "Delete", new {ArticleId=item.ArticleId, EtagereId=item.EtagereId})
             </td>
         </tr>
 }
