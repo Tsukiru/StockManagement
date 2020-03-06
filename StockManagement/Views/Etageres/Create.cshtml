@@ -1,10 +1,10 @@
 ﻿@model StockManagement.Models.Etagere
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Créer";
 }
 
-<h1>Create</h1>
+    <h1>Créer</h1>
 
 <h4>Etagere</h4>
 <hr />
@@ -13,23 +13,23 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="PoidsMaximum" class="control-label"></label>
+                <label asp-for="PoidsMaximum" class="control-label">Poids maximum</label>
                 <input asp-for="PoidsMaximum" class="form-control" />
                 <span asp-validation-for="PoidsMaximum" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SecteurId" class="control-label"></label>
+                <label asp-for="SecteurId" class="control-label">Identifiant secteur</label>
                 <select asp-for="SecteurId" class ="form-control" asp-items="ViewBag.SecteurId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Créer" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Retour à la liste</a>
 </div>
 
 @section Scripts {

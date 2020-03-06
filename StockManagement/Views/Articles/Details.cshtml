@@ -1,7 +1,7 @@
 ﻿@model StockManagement.Models.Article
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Détails";
 }
 
 <h1>Details</h1>
@@ -11,31 +11,31 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Libelle)
+            Nom
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Libelle)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SKU)
+            Code barre
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.SKU)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateSortie)
+            Date
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DateSortie)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrixInitial)
+            Prix initial
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PrixInitial)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Poids)
+            Poids
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Poids)
@@ -43,6 +43,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editer</a> |
+    <a asp-action="Index">Retour à la liste</a>
 </div>

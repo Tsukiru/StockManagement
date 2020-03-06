@@ -1,10 +1,10 @@
 ﻿@model StockManagement.Models.Article
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Creer";
 }
 
-<h1>Create</h1>
+    <h1>Créer</h1>
 
 <h4>Article</h4>
 <hr />
@@ -13,39 +13,39 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Libelle" class="control-label"></label>
+                <label asp-for="Libelle" class="control-label">Nom</label>
                 <input asp-for="Libelle" class="form-control" />
                 <span asp-validation-for="Libelle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SKU" class="control-label"></label>
+                <label asp-for="SKU" class="control-label">Code Barre</label>
                 <input asp-for="SKU" class="form-control" />
                 <span asp-validation-for="SKU" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateSortie" class="control-label"></label>
+                <label asp-for="DateSortie" class="control-label">Date</label>
                 <input asp-for="DateSortie" class="form-control" />
                 <span asp-validation-for="DateSortie" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PrixInitial" class="control-label"></label>
+                <label asp-for="PrixInitial" class="control-label">Prix initial</label>
                 <input asp-for="PrixInitial" class="form-control" />
                 <span asp-validation-for="PrixInitial" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Poids" class="control-label"></label>
+                <label asp-for="Poids" class="control-label">Poids</label>
                 <input asp-for="Poids" class="form-control" />
                 <span asp-validation-for="Poids" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Créer" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Retour à la liste</a>
 </div>
 
 @section Scripts {
